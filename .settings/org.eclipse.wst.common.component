@@ -5,6 +5,6 @@
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/java"/>
         <wb-resource deploy-path="/WEB-INF/classes" source-path="/src/main/resources"/>
         <property name="java-output-path" value="/javaeefootball/target/classes"/>
-        <property name="context-root" value="PhotoGallery"/>
+        <property name="context-root" value="javaeefootball"/>
     </wb-module>
 </project-modules>
