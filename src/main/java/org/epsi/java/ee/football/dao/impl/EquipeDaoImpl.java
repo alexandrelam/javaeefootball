@@ -7,20 +7,20 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.epsi.java.ee.football.dao.UserDao;
+import org.epsi.java.ee.football.dao.EquipeDao;
 import org.epsi.java.ee.football.exception.GalleryException;
-import org.epsi.java.ee.football.model.User;
+import org.epsi.java.ee.football.model.Equipe;
 
 import com.mysql.jdbc.Driver;
 
-public class UserDaoImpl implements UserDao {
+public class EquipeDaoImpl implements EquipeDao {
 	private static final String MYSQL_HOST = "localhost";
 	private static final String MYSQL_PORT = "3306";
 	private static final String MYSQL_DATABASE = "francefoot";
 	private static final String MYSQL_USER = "root";
 	private static final String MYSQL_PWD = "";
 
-	public UserDaoImpl() throws SQLException {
+	public EquipeDaoImpl() throws SQLException {
 		DriverManager.registerDriver(new Driver());
 	}
 

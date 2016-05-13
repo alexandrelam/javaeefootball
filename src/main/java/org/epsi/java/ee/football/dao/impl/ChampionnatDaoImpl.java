@@ -7,44 +7,49 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.epsi.java.ee.football.dao.UserDao;
+import org.epsi.java.ee.football.dao.ChampionnatDao;
 import org.epsi.java.ee.football.exception.GalleryException;
-import org.epsi.java.ee.football.model.User;
+import org.epsi.java.ee.football.model.Championnat;
 
 import com.mysql.jdbc.Driver;
 
-public class UserDaoImpl implements UserDao {
+public class ChampionnatDaoImpl implements ChampionnatDao {
 	private static final String MYSQL_HOST = "localhost";
 	private static final String MYSQL_PORT = "3306";
 	private static final String MYSQL_DATABASE = "francefoot";
 	private static final String MYSQL_USER = "root";
 	private static final String MYSQL_PWD = "";
 
-	public UserDaoImpl() throws SQLException {
+	public ChampionnatDaoImpl() throws SQLException {
 		DriverManager.registerDriver(new Driver());
 	}
 
 	@Override
-	public User create(User newUser) {
+	public Championnat create(Championnat newChampionnat) {
 		Connection conn = null;
 
 		try {
 			conn = getConnection();
-			String query = "INSERT INTO user (pseudonym, email, password) VALUES (?,?,?)";
+			String query = "INSERT INTO championnat (nom_championnat, logo_championnat, pays_championnat, nb_equipe, pts_victoire, pts_nul, pts_defaite, regle_classement) VALUES (?,?,?,?,?,?,?,?)";
 			PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, newUser.getPseudonym());
-			stmt.setString(2, newUser.getEmail());
-			stmt.setString(3, newUser.getPassword());
+			stmt.setString(1, newChampionnat.getNomChampionnat());
+			stmt.setString(2, newChampionnat.getLogoChampionnat());
+			stmt.setString(3, newChampionnat.getPaysChampionnat());
+			stmt.setString(4, newChampionnat.getNbEquipe());
+			stmt.setString(5, newChampionnat.getPtsVictoire());
+			stmt.setString(6, newChampionnat.getPtsNul());
+			stmt.setString(7, newChampionnat.getPtsDefaite());
+			stmt.setString(8, newChampionnat.getRegleClassement());
 			stmt.executeUpdate();
 
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
-				newUser.setId(rs.getLong(1));
-				return newUser;
+				newChampionnat.setIdChampionnat(rs.getLong(1));
+				return newChampionnat;
 			}
 
 			// cannot be here
-			throw new GalleryException("User was not inserted in database due to an unknown error");
+			throw new GalleryException("Championnat was not inserted in database due to an unknown error");
 
 		} catch (SQLException e) {
 			throw new GalleryException("Something went wrong when calling database:" + e.getMessage(), e);
@@ -54,23 +59,28 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User read(long id) {
+	public Championnat read(long id) {
 		Connection conn = null;
 
 		try {
 			conn = getConnection();
-			String query = "SELECT * FROM user where id= ?";
+			String query = "SELECT * FROM championnat where id_championnat= ?";
 			PreparedStatement stmt = conn.prepareStatement(query);
 			stmt.setLong(1, id);
 			ResultSet results = stmt.executeQuery();
 
 			if (results.next()) {
-				User user = new User();
-				user.setId(results.getLong("id"));
-				user.setPseudonym(results.getString("pseudonym"));
-				user.setEmail(results.getString("email"));
-				user.setPassword(results.getString("password"));
-				return user;
+				Championnat championnat = new Championnat();
+				championnat.setIdChampionnat(results.getLong("id_championnat"));
+				championnat.setNomChampionnat(results.getString("nom_championnat"));
+				championnat.setLogoChampionnat(results.getString("logo_championnat"));
+				championnat.setPaysChampionnat(results.getString("pays_championnat"));
+				championnat.setNomChampionnat(results.getString("nb_equipe"));
+				championnat.setLogoChampionnat(results.getString("pts_victoire"));
+				championnat.setPaysChampionnat(results.getString("pts_nul");
+				championnat.setLogoChampionnat(results.getString("pts_defaite"));
+				championnat.setPaysChampionnat(results.getString("regle_classement");
+				return championnat;
 			}
 
 			return null;
