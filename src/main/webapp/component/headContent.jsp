@@ -16,3 +16,5 @@
 
 </script>
 
+<link rel="stylesheet" type="text/css" href="ressources/style.css" media="screen">
+

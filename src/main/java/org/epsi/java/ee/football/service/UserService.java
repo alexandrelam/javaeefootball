@@ -15,4 +15,6 @@ public interface UserService {
 	 */
 	User create(String pseudonym, String email, String password, boolean isCguValidated);
 
+	User readAll();
+
 }

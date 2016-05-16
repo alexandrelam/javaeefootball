@@ -24,6 +24,7 @@
 					</c:if>
 
 					<div class="col-md-4">
+					${image.url}
 						<img src="${image.url}" class="img-responsive img-rounded"
 							alt="${image.name}" />
 						<p class="text-center">

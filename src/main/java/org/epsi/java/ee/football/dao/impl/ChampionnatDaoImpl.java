@@ -93,17 +93,17 @@ public class ChampionnatDaoImpl implements ChampionnatDao {
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(Championnat championnat) {
 		Connection conn = null;
 
 		try {
 			conn = getConnection();
 			String query = "UPDATE user SET pseudonym=?, email=?, password=? WHERE id=?";
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, user.getPseudonym());
-			stmt.setString(2, user.getEmail());
-			stmt.setString(3, user.getPassword());
-			stmt.setLong(4, user.getId());
+			stmt.setString(1, championnat.getPseudonym());
+			stmt.setString(2, championnat.getEmail());
+			stmt.setString(3, championnat.getPassword());
+			stmt.setLong(4, championnat.getId());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {

@@ -10,7 +10,7 @@ public interface EquipeDao {
 	 * @param newUser: The user to insert. Must not be null.
 	 * @return The user inserted
 	 */
-	User create(User newUser);
+	Equipe create(Equipe newUser);
 
 	/**
 	 * Retrieve a User from database
@@ -18,14 +18,14 @@ public interface EquipeDao {
 	 * @param id: The id of the user to retrieved
 	 * @return The user with the id given in parameter, null otherwise.
 	 */
-	User read(long id);
+	Equipe read(long id);
 
 	/**
 	 * Update user information in database based on user id.
 	 *
 	 * @param user: The user to update. Must not be null.
 	 */
-	void update(User user);
+	void update(Equipe equipe);
 
 	/**
 	 * Remove a user from database.

@@ -16,7 +16,7 @@ import com.mysql.jdbc.Driver;
 public class UserDaoImpl implements UserDao {
 	private static final String MYSQL_HOST = "localhost";
 	private static final String MYSQL_PORT = "3306";
-	private static final String MYSQL_DATABASE = "francefoot";
+	private static final String MYSQL_DATABASE = "gallery";
 	private static final String MYSQL_USER = "root";
 	private static final String MYSQL_PWD = "";
 
@@ -54,14 +54,42 @@ public class UserDaoImpl implements UserDao {
 	}
 
 	@Override
-	public User read(long id) {
+	public User read() {
 		Connection conn = null;
 
 		try {
 			conn = getConnection();
 			String query = "SELECT * FROM user where id= ?";
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setLong(1, id);
+			stmt.setLong(1, 1);
+			ResultSet results = stmt.executeQuery();
+
+			if (results.next()) {
+				User user = new User();
+				user.setId(results.getLong("id"));
+				user.setPseudonym(results.getString("pseudonym"));
+				user.setEmail(results.getString("email"));
+				user.setPassword(results.getString("password"));
+				return user;
+			}
+
+			return null;
+
+		} catch (SQLException e) {
+			throw new GalleryException("Something went wrong when calling database:" + e.getMessage(), e);
+		} finally {
+			closeConnection(conn);
+		}
+	}
+	
+	@Override
+	public User readAll() {
+		Connection conn = null;
+
+		try {
+			conn = getConnection();
+			String query = "SELECT * FROM user";
+			PreparedStatement stmt = conn.prepareStatement(query);
 			ResultSet results = stmt.executeQuery();
 
 			if (results.next()) {

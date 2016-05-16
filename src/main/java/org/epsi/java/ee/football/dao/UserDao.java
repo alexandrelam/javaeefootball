@@ -18,7 +18,15 @@ public interface UserDao {
 	 * @param id: The id of the user to retrieved
 	 * @return The user with the id given in parameter, null otherwise.
 	 */
-	User read(long id);
+	User read();
+	
+	/**
+	 * Retrieve a User from database
+	 *
+	 * @param id: The id of the user to retrieved
+	 * @return The user with the id given in parameter, null otherwise.
+	 */
+	User readAll();
 
 	/**
 	 * Update user information in database based on user id.
