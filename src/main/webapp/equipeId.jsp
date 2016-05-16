@@ -1,50 +1,22 @@
 <!DOCTYPE html>
-	<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <head>
-	<c:import url="component/headContent.jsp" />
+<c:import url="component/headContent.jsp" />
 </head>
 
 <body>
-<c:import url="component/navigationBar.jsp" />
+	<c:import url="component/navigationBar.jsp" />
 
-<div id="row">
-	<div id="centerNav">
-		
-	
-		<% 
-            String attribut = (String) request.getAttribute("id");
-            out.println( attribut );
-            %>
-            
-            <table class="table table-bordered">
-		<thead>
-			<tr>
-				<th>Rang</th>
-				<th>Equipe</th>
-				<th>Pts</th>
-				<th>J.</th>
-				<th>N.</th>
-				<th>P.</th>
-				<th>Diff.</th>
-			</tr>
-		</thead>
-		<tbody>
-		
-		 <c:forEach items="${test}" var="item">
-		 <c:set var="totalCount" value="${totalCount + 1}" />
-			<tr>
-				<td>${totalCount}</td>
-	
-				<c:out value="${item.nomequipe}" /></td>
-		
-			</tr>
-		</c:forEach>
-	
-		</tbody>
-	</table>
+	<div id="row">
+		<div id="centerNav">
+
+			<c:forEach items="${test}" var="item">
+				<h1><c:out value="${item.nomEquipe}" /></h1>
+				<img src="<c:out value="images/logo/${item.logoEquipe}" />" width="100px"/>
+			</c:forEach>
+		</div>
 	</div>
-</div>
-	
+
 </body>
 </html>

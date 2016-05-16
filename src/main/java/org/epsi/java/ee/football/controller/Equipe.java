@@ -13,7 +13,7 @@ import org.epsi.java.ee.football.controller.Championnat.Championnnat;
 import org.epsi.java.ee.football.exception.GalleryException;
 
 import org.epsi.java.ee.football.service.UserService;
-
+import org.epsi.java.ee.football.model.Equipee;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -31,19 +31,7 @@ public class Equipe extends HttpServlet {
 	private static final String MYSQL_USER = "root";
 	private static final String MYSQL_PWD = "";
 
-	public class Equipee {
-
-		private String nomequipe;
-
-		public void setNomequipe(String nomequipe) {
-			this.nomequipe = nomequipe;
-		}
-
-		public String getNomequipe() {
-			return nomequipe;
-		}
-
-	}
+	
 
 	private static final long serialVersionUID = 1L;
 
@@ -72,14 +60,16 @@ public class Equipe extends HttpServlet {
 				Statement stmt = conn.createStatement();
 				ResultSet rs;
 
-				rs = stmt.executeQuery("SELECT * FROM equipe");
+				rs = stmt.executeQuery("SELECT * FROM equipe WHERE id = " + id);
 				while (rs.next()) {
 
 
 					String nom = rs.getString("surnom_equipe");
+					String logo = rs.getString("logo_equipe");
 
 					Equipee equipe = new Equipee();
-					equipe.setNomequipe(nom);
+					equipe.setNomEquipe(nom);
+					equipe.setLogoEquipe(logo);
 
 					EquipeArray.add(equipe);
 				}
@@ -105,20 +95,24 @@ public class Equipe extends HttpServlet {
 
 
 					String nom = rs.getString("surnom_equipe");
+					String logo = rs.getString("logo_equipe");
 
 					Equipee equipe = new Equipee();
-					equipe.setNomequipe(nom);
+					equipe.setNomEquipe(nom);
+					equipe.setLogoEquipe(logo);
 
 					EquipeArray.add(equipe);
 
 					request.setAttribute("test", EquipeArray);
 
-					request.getRequestDispatcher("/equipeId.jsp").forward(request, response);
+				
 
 				}
+				
+				request.getRequestDispatcher("/equipe.jsp").forward(request, response);
 			}
 
-			System.out.println(EquipeArray);
+			
 
 			conn.close();
 		} catch (Exception e) {
