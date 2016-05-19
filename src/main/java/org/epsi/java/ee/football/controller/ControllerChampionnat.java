@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.epsi.java.ee.football.exception.GalleryException;
 import org.epsi.java.ee.football.model.User;
 import org.epsi.java.ee.football.service.UserService;
-import org.epsi.java.ee.football.model.Championnnat;
+import org.epsi.java.ee.football.model.Championnat;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -22,7 +22,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Championnat extends HttpServlet {
+public class ControllerChampionnat extends HttpServlet {
 
 	private static final String MYSQL_HOST = "localhost";
 	private static final String MYSQL_PORT = "3306";
@@ -48,7 +48,7 @@ public class Championnat extends HttpServlet {
 			conn = getConnection();
 
 			ArrayList<String> arrList = new ArrayList<String>();
-			List<Championnnat> championnatList = new ArrayList<Championnnat>();
+			List<Championnat> championnatList = new ArrayList<Championnat>();
 
 			if (request.getParameter("id") != null) {
 
@@ -91,7 +91,7 @@ public class Championnat extends HttpServlet {
 					String diff = rs.getString("Diff");
 					String points = rs.getString("Points");
 
-					Championnnat championnat = new Championnnat();
+					Championnat championnat = new Championnat();
 					championnat.setId(idC);
 					championnat.setNom(nom);
 					championnat.setLogo(logo);
@@ -128,7 +128,7 @@ public class Championnat extends HttpServlet {
 					String nom = rs.getString("nom");
 					String logo = rs.getString("logo");
 
-					Championnnat championnat = new Championnnat();
+					Championnat championnat = new Championnat();
 					championnat.setId(idC);
 					championnat.setNom(nom);
 					championnat.setLogo(logo);

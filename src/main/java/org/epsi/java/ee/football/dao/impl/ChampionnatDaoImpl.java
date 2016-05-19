@@ -49,7 +49,7 @@ public class ChampionnatDaoImpl implements ChampionnatDao {
 			}
 
 			// cannot be here
-			throw new GalleryException("Championnat was not inserted in database due to an unknown error");
+			throw new GalleryException("ControllerChampionnat was not inserted in database due to an unknown error");
 
 		} catch (SQLException e) {
 			throw new GalleryException("Something went wrong when calling database:" + e.getMessage(), e);

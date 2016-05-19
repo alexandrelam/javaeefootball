@@ -35,7 +35,7 @@
   
   <servlet>
     <servlet-name>Championnat</servlet-name>
-    <servlet-class>org.epsi.java.ee.football.controller.Championnat</servlet-class>
+    <servlet-class>org.epsi.java.ee.football.controller.ControllerChampionnat</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
