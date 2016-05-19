@@ -26,6 +26,7 @@
 							<td><img
 								src="<c:out value="images/logo/${item.logoEquipe}" />"
 								width="50px" /><br /> <c:out value="${item.nomEquipe}" /></td>
+
 						</tr>
 					</c:forEach>
 				</tbody>

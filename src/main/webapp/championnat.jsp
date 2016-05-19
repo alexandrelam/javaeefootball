@@ -13,7 +13,7 @@
 		<ul id="home-nav">
 			 <c:forEach items="${test}" var="item">
 			<li><img src="<c:out value="images/championnat/${item.logo}" />"/>
-			<c:out value="${item.nom}" /></li>
+			<a href="championnat?id=<c:out value="${item.id}" />"><c:out value="${item.nom}" /></a></li>
 			</c:forEach>
 		</ul>
 		

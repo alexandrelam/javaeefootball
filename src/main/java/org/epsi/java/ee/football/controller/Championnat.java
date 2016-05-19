@@ -12,7 +12,7 @@ import javax.servlet.http.HttpSession;
 import org.epsi.java.ee.football.exception.GalleryException;
 import org.epsi.java.ee.football.model.User;
 import org.epsi.java.ee.football.service.UserService;
-
+import org.epsi.java.ee.football.model.Championnnat;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -30,86 +30,6 @@ public class Championnat extends HttpServlet {
 	private static final String MYSQL_USER = "root";
 	private static final String MYSQL_PWD = "";
 
-	public class Championnnat {
-		private String id;
-		private String nom;
-		private String logo;
-		private String journee;
-		private String bp;
-		private String bc;
-		private String diff;
-		private String points;
-
-		// other fields need to be declared as well as their setter methods
-
-		public void setId(String id) {
-			this.id = id;
-		}
-
-		public void setLogo(String logo) {
-			this.logo = logo;
-		}
-
-		public void setJournee(String journee) {
-			this.journee = journee;
-		}
-
-		public void setNom(String nom) {
-			this.nom = nom;
-		}
-
-		public void setBp(String bp) {
-			this.bp = bp;
-		}
-
-		public void setBc(String bc) {
-			this.bc = bc;
-		}
-
-		public void setDiff(String diff) {
-			this.diff = diff;
-		}
-
-		public void setPoints(String points) {
-			this.points = points;
-		}
-
-		public String getNom() {
-			return nom;
-		}
-
-		public String getLogo() {
-			return logo;
-		}
-
-		public String getJournee() {
-			return journee;
-		}
-
-		public String getBp() {
-			return bp;
-		}
-
-		public String getBc() {
-			return bc;
-		}
-
-		public String getDiff() {
-			return diff;
-		}
-
-		public String getPoints() {
-			return points;
-		}
-
-		public String foo() {
-
-			String prix = "5";
-			// Do something here
-			return prix;
-		}
-
-	}
 
 	private static final long serialVersionUID = 1L;
 
@@ -131,7 +51,7 @@ public class Championnat extends HttpServlet {
 			List<Championnnat> championnatList = new ArrayList<Championnnat>();
 
 			if (request.getParameter("id") != null) {
-				
+
 				// on récupère l'id dans l'url
 				String id = request.getParameter("id");
 				// connexion SQL
@@ -161,7 +81,8 @@ public class Championnat extends HttpServlet {
 				while (rs.next()) {
 
 					arrList.add(rs.getString("Points"));
-
+					
+					String idC = rs.getString("id");
 					String nom = rs.getString("surnom_equipe");
 					String logo = rs.getString("logo_equipe");
 					String journee = rs.getString("J");
@@ -171,6 +92,7 @@ public class Championnat extends HttpServlet {
 					String points = rs.getString("Points");
 
 					Championnnat championnat = new Championnnat();
+					championnat.setId(idC);
 					championnat.setNom(nom);
 					championnat.setLogo(logo);
 					championnat.setJournee(journee);
@@ -201,21 +123,22 @@ public class Championnat extends HttpServlet {
 				while (rs.next()) {
 
 					arrList.add(rs.getString("nom"));
-
+					
+					String idC = rs.getString("id");
 					String nom = rs.getString("nom");
 					String logo = rs.getString("logo");
 
 					Championnnat championnat = new Championnnat();
+					championnat.setId(idC);
 					championnat.setNom(nom);
 					championnat.setLogo(logo);
 
 					championnatList.add(championnat);
 
 					request.setAttribute("test", championnatList);
-
-					request.getRequestDispatcher("/championnat.jsp").forward(request, response);
-
 				}
+
+				request.getRequestDispatcher("/championnat.jsp").forward(request, response);
 			}
 
 			System.out.println(championnatList);

@@ -10,6 +10,9 @@ public class Equipee {
 	private String maillotDom;
 	private String maillotExt;
 	private String maillotTrois;
+	private String nomStade;
+	private String capaciteStade;
+	private String idChampionnat;
 	
 	public long getIdEquipe() {
 		return idEquipe;
@@ -77,8 +80,6 @@ public class Equipee {
 	public void setIdChampionnat(String idChampionnat) {
 		this.idChampionnat = idChampionnat;
 	}
-	private String nomStade;
-	private String capaciteStade;
-	private String idChampionnat;
+	
 
 }

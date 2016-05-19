@@ -52,7 +52,15 @@
     <servlet-name>Equipe</servlet-name>
     <url-pattern>/equipe</url-pattern>
   </servlet-mapping>
-  
-  
 
+  <servlet>
+    <servlet-name>Blog</servlet-name>
+    <servlet-class>org.epsi.java.ee.football.controller.Blog</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Blog</servlet-name>
+    <url-pattern>/blog</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

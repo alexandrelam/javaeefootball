@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.epsi.java.ee.football.model.Equipee;
+import org.epsi.java.ee.football.model.Blogg;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +18,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Equipe extends HttpServlet {
+public class Blog extends HttpServlet {
 
 	private static final String MYSQL_HOST = "localhost";
 	private static final String MYSQL_PORT = "3306";
@@ -42,7 +42,7 @@ public class Equipe extends HttpServlet {
 		try {
 			conn = getConnection();
 
-			List<Equipee> EquipeArray = new ArrayList<Equipee>();
+			List<Blogg> EquipeArray = new ArrayList<Blogg>();
 
 			if (request.getParameter("id") != null) {
 
@@ -55,26 +55,19 @@ public class Equipe extends HttpServlet {
 				rs = stmt.executeQuery("SELECT * FROM equipe WHERE id = " + id);
 				while (rs.next()) {
 
-					String nom = rs.getString("surnom_equipe");
-					String logo = rs.getString("logo_equipe");
-					String abr = rs.getString("abr_equipe");
-					String maillotdom = rs.getString("maillot_dom");
-					String maillotext = rs.getString("maillot_ext");
-					String maillottrois = rs.getString("maillot_trois");
-					String stade = rs.getString("nom_stade");
-					String capacite = rs.getString("capacite_stade");
+					String titre = rs.getString("titre");
+					String contenu = rs.getString("contenu");
+					String image = rs.getString("image");
+					String date = rs.getString("date");
+					
+					Blogg blog = new Blogg();
+					blog.setTitre(titre);
+					blog.setContenu(contenu);
+					blog.setImage(image);
+					blog.setDate(date);
+				
 
-					Equipee equipe = new Equipee();
-					equipe.setNomEquipe(nom);
-					equipe.setLogoEquipe(logo);
-					equipe.setAbrEquipe(abr);
-					equipe.setMaillotDom(maillotdom);
-					equipe.setMaillotExt(maillotext);
-					equipe.setMaillotTrois(maillottrois);
-					equipe.setNomStade(stade);
-					equipe.setCapaciteStade(capacite);
-
-					EquipeArray.add(equipe);
+					EquipeArray.add(blog);
 				}
 
 				if (id.equalsIgnoreCase("3")) {
@@ -92,22 +85,27 @@ public class Equipe extends HttpServlet {
 				Statement stmt = conn.createStatement();
 				ResultSet rs;
 
-				rs = stmt.executeQuery("SELECT * FROM equipe");
+				rs = stmt.executeQuery("SELECT * FROM blog");
 				while (rs.next()) {
 
-					String nom = rs.getString("surnom_equipe");
-					String logo = rs.getString("logo_equipe");
+					String titre = rs.getString("titre");
+					String contenu = rs.getString("contenu");
+					String image = rs.getString("image");
+					String date = rs.getString("date");
+					
+					Blogg blog = new Blogg();
+					blog.setTitre(titre);
+					blog.setContenu(contenu);
+					blog.setImage(image);
+					blog.setDate(date);
+				
 
-					Equipee equipe = new Equipee();
-					equipe.setNomEquipe(nom);
-					equipe.setLogoEquipe(logo);
-
-					EquipeArray.add(equipe);
+					EquipeArray.add(blog);
 
 					request.setAttribute("test", EquipeArray);
 				}
 
-				request.getRequestDispatcher("/equipe.jsp").forward(request, response);
+				request.getRequestDispatcher("/blog.jsp").forward(request, response);
 			}
 
 			conn.close();

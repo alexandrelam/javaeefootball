@@ -9,7 +9,7 @@
 					class="icon-bar"></span> <span class="icon-bar"></span> <span
 					class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand" href="<c:url value="/library" />">Football</a>
+			<a class="navbar-brand" href="<c:url value="/championnat" />">Football</a>
 		</div>
 
 		<div class="collapse navbar-collapse"
@@ -23,6 +23,9 @@
 							<a href="<c:url value="/profile.jsp" />">Profile</a>
 						</c:otherwise>
 					</c:choose></li>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="<c:url value="blog" />">Blog</a></li>
 			</ul>
 		</div>
 	</div>
