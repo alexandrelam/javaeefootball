@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.epsi.java.ee.football.model.Equipee;
+import org.epsi.java.ee.football.model.Equipe;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +18,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Equipe extends HttpServlet {
+public class ControllerEquipe extends HttpServlet {
 
 	private static final String MYSQL_HOST = "localhost";
 	private static final String MYSQL_PORT = "3306";
@@ -42,7 +42,7 @@ public class Equipe extends HttpServlet {
 		try {
 			conn = getConnection();
 
-			List<Equipee> EquipeArray = new ArrayList<Equipee>();
+			List<Equipe> EquipeArray = new ArrayList<Equipe>();
 
 			if (request.getParameter("id") != null) {
 
@@ -52,7 +52,7 @@ public class Equipe extends HttpServlet {
 				Statement stmt = conn.createStatement();
 				ResultSet rs;
 
-				rs = stmt.executeQuery("SELECT * FROM equipe WHERE id = " + id);
+				rs = stmt.executeQuery("SELECT * FROM equipe WHERE id_equipe = " + id);
 				while (rs.next()) {
 
 					String nom = rs.getString("surnom_equipe");
@@ -64,7 +64,7 @@ public class Equipe extends HttpServlet {
 					String stade = rs.getString("nom_stade");
 					String capacite = rs.getString("capacite_stade");
 
-					Equipee equipe = new Equipee();
+					Equipe equipe = new Equipe();
 					equipe.setNomEquipe(nom);
 					equipe.setLogoEquipe(logo);
 					equipe.setAbrEquipe(abr);
@@ -98,7 +98,7 @@ public class Equipe extends HttpServlet {
 					String nom = rs.getString("surnom_equipe");
 					String logo = rs.getString("logo_equipe");
 
-					Equipee equipe = new Equipee();
+					Equipe equipe = new Equipe();
 					equipe.setNomEquipe(nom);
 					equipe.setLogoEquipe(logo);
 

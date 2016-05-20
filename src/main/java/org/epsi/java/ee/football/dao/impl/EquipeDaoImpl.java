@@ -25,22 +25,19 @@ public class EquipeDaoImpl implements EquipeDao {
 	}
 
 	@Override
-	public User create(User newUser) {
+	public Equipe create(Equipe newEquipe) {
 		Connection conn = null;
 
 		try {
 			conn = getConnection();
 			String query = "INSERT INTO user (pseudonym, email, password) VALUES (?,?,?)";
 			PreparedStatement stmt = conn.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
-			stmt.setString(1, newUser.getPseudonym());
-			stmt.setString(2, newUser.getEmail());
-			stmt.setString(3, newUser.getPassword());
 			stmt.executeUpdate();
 
 			ResultSet rs = stmt.getGeneratedKeys();
 			if (rs.next()) {
-				newUser.setId(rs.getLong(1));
-				return newUser;
+				newEquipe.setIdEquipe(rs.getLong(1));
+				return newEquipe;
 			}
 
 			// cannot be here
@@ -54,7 +51,7 @@ public class EquipeDaoImpl implements EquipeDao {
 	}
 
 	@Override
-	public User read(long id) {
+	public Equipe read(long id) {
 		Connection conn = null;
 
 		try {
@@ -65,11 +62,9 @@ public class EquipeDaoImpl implements EquipeDao {
 			ResultSet results = stmt.executeQuery();
 
 			if (results.next()) {
-				User user = new User();
-				user.setId(results.getLong("id"));
-				user.setPseudonym(results.getString("pseudonym"));
-				user.setEmail(results.getString("email"));
-				user.setPassword(results.getString("password"));
+				Equipe user = new Equipe();
+				user.setIdEquipe(results.getLong("id"));
+				user.setNomEquipe(results.getString("nom_equipe"));
 				return user;
 			}
 
@@ -83,17 +78,15 @@ public class EquipeDaoImpl implements EquipeDao {
 	}
 
 	@Override
-	public void update(User user) {
+	public void update(Equipe equipe) {
 		Connection conn = null;
 
 		try {
 			conn = getConnection();
 			String query = "UPDATE user SET pseudonym=?, email=?, password=? WHERE id=?";
 			PreparedStatement stmt = conn.prepareStatement(query);
-			stmt.setString(1, user.getPseudonym());
-			stmt.setString(2, user.getEmail());
-			stmt.setString(3, user.getPassword());
-			stmt.setLong(4, user.getId());
+
+			stmt.setLong(4, equipe.getIdEquipe());
 			stmt.executeUpdate();
 
 		} catch (SQLException e) {

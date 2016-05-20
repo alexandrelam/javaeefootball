@@ -11,7 +11,7 @@
 <div id="row">
 	<div id="centerNav">
 		<ul id="home-nav">
-			 <c:forEach items="${test}" var="item">
+			 <c:forEach items="${championnat}" var="item">
 			<li><img src="<c:out value="images/championnat/${item.logo}" />"/>
 			<a href="championnat?id=<c:out value="${item.id}" />"><c:out value="${item.nom}" /></a></li>
 			</c:forEach>

@@ -45,7 +45,7 @@
   
   <servlet>
     <servlet-name>Equipe</servlet-name>
-    <servlet-class>org.epsi.java.ee.football.controller.Equipe</servlet-class>
+    <servlet-class>org.epsi.java.ee.football.controller.ControllerEquipe</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>

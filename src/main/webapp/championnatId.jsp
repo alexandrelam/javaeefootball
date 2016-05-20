@@ -24,7 +24,7 @@
 				</thead>
 				<tbody>
 
-					<c:forEach items="${test}" var="item">
+					<c:forEach items="${championnat}" var="item">
 						<c:set var="totalCount" value="${totalCount + 1}" />
 						<tr>
 							<td>${totalCount}</td>

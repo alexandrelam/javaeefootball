@@ -59,30 +59,44 @@ public class ControllerChampionnat extends HttpServlet {
 				ResultSet rs;
 
 				rs = stmt.executeQuery(
-						"SELECT e.id,logo_equipe,surnom_equipe,sum(case when e.id = m.id_dom and m.buts_dom > m.buts_ext "
-								+ "        then 3 " + "             when e.id = m.id_dom and m.buts_dom = m.buts_ext "
-								+ "        then 1 " + "             when e.id = m.id_dom and m.buts_dom < m.buts_ext "
-								+ "        then 0 " + "        when e.id = m.id_ext and m.buts_dom < m.buts_ext "
-								+ "        then 3 " + "             when e.id = m.id_ext and m.buts_dom = m.buts_ext "
-								+ "        then 1 " + "             when e.id = m.id_ext and m.buts_dom > m.buts_ext "
-								+ "        then 0 " + "        end) as Points , " + "        max(m.id_Journee) as J, "
-								+ "        sum(case when e.id = m.id_dom then m.buts_dom "
-								+ "             when e.id = m.id_ext then m.buts_ext " + "        end) as Bp, "
-								+ "        sum(case when e.id = m.id_dom then m.buts_ext "
-								+ "                 when e.id = m.id_ext then m.buts_dom " + "        end) as Bc, "
-								+ "        ((sum(case when e.id = m.id_dom then m.buts_dom "
-								+ "             when e.id = m.id_ext then m.buts_ext " + "        end)) - "
-								+ "        (sum(case when e.id = m.id_dom then m.buts_ext "
-								+ "                 when e.id = m.id_ext then m.buts_dom " + "        end))) as Diff "
-								+ "          " + "         from equipe e, `match`m " + "        where m.id_ext = e.id "
-								+ "        or m.id_dom = e.id " + "        and e.id_championnat = " + id + " "
-								+ "        and e.id_championnat = m.id_championnat " + "        group by e.id "
-								+ "        order by Points DESC,Diff DESC, Bp DESC");
+						"select id_equipe, surnom_equipe,logo_equipe,sum(case when e.id_equipe = m.id_dom and m.buts_dom > m.buts_ext "
++ "    then 3 "
++ "    when e.id_equipe = m.id_dom and m.buts_dom = m.buts_ext "
++ "    then 1 "
++ "    when e.id_equipe = m.id_dom and m.buts_dom < m.buts_ext "
++ "    then 0 "
++ "	when e.id_equipe = m.id_ext and m.buts_dom < m.buts_ext "
++ "    then 3 "
++ "         when e.id_equipe = m.id_ext and m.buts_dom = m.buts_ext "
++ "    then 1 "
++ "         when e.id_equipe = m.id_ext and m.buts_dom > m.buts_ext "
++ "    then 0 "
++ "end) as Points , "
++ "max(m.id_Journee) as J, "
++ "sum(case when e.id_equipe = m.id_dom then m.buts_dom "
++ "     when e.id_equipe = m.id_ext then m.buts_ext "
++ "end) as Bp, "
++ "sum(case when e.id_equipe = m.id_dom then m.buts_ext "
++ "         when e.id_equipe = m.id_ext then m.buts_dom "
++ "end) as Bc, "
++ "((sum(case when e.id_equipe = m.id_dom then m.buts_dom "
++ "     when e.id_equipe = m.id_ext then m.buts_ext "
++ "end)) - "
++ "(sum(case when e.id_equipe = m.id_dom then m.buts_ext "
++ "         when e.id_equipe = m.id_ext then m.buts_dom "
++ "end))) as Diff "
++ "from equipe e "
++ "join `match`m on m.id_ext = e.id_equipe "
++ "or m.id_dom = e.id_equipe "
++ "Where e.id_championnat = 1 "
++ "and e.id_championnat = m.id_championnat "
++ "group by id_equipe "
++ "order by Points DESC,Diff DESC, Bp DESC");
 				while (rs.next()) {
 
 					arrList.add(rs.getString("Points"));
 					
-					String idC = rs.getString("id");
+					String idC = rs.getString("id_equipe");
 					String nom = rs.getString("surnom_equipe");
 					String logo = rs.getString("logo_equipe");
 					String journee = rs.getString("J");
@@ -111,7 +125,7 @@ public class ControllerChampionnat extends HttpServlet {
 					request.setAttribute("id", id);
 				}
 
-				request.setAttribute("test", championnatList);
+				request.setAttribute("championnat", championnatList);
 
 				request.getRequestDispatcher("/championnatId.jsp").forward(request, response);
 			} else {
@@ -122,11 +136,11 @@ public class ControllerChampionnat extends HttpServlet {
 				rs = stmt.executeQuery("SELECT * FROM championnat");
 				while (rs.next()) {
 
-					arrList.add(rs.getString("nom"));
+					arrList.add(rs.getString("nom_championnat"));
 					
-					String idC = rs.getString("id");
-					String nom = rs.getString("nom");
-					String logo = rs.getString("logo");
+					String idC = rs.getString("id_championnat");
+					String nom = rs.getString("nom_championnat");
+					String logo = rs.getString("logo_championnat");
 
 					Championnat championnat = new Championnat();
 					championnat.setId(idC);
@@ -135,7 +149,7 @@ public class ControllerChampionnat extends HttpServlet {
 
 					championnatList.add(championnat);
 
-					request.setAttribute("test", championnatList);
+					request.setAttribute("championnat", championnatList);
 				}
 
 				request.getRequestDispatcher("/championnat.jsp").forward(request, response);
