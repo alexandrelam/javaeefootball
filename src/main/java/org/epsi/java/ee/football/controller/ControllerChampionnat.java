@@ -88,7 +88,7 @@ public class ControllerChampionnat extends HttpServlet {
 + "from equipe e "
 + "join `match`m on m.id_ext = e.id_equipe "
 + "or m.id_dom = e.id_equipe "
-+ "Where e.id_championnat = 1 "
++ "Where e.id_championnat = " + id + " "
 + "and e.id_championnat = m.id_championnat "
 + "group by id_equipe "
 + "order by Points DESC,Diff DESC, Bp DESC");

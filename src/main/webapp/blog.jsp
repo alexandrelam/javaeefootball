@@ -14,7 +14,7 @@
 				
 			
 
-					<c:forEach var="item" items="${test}" varStatus="status">
+					<c:forEach var="item" items="${blog}" varStatus="status">
 					<c:if test="${status.index % 3 == 0 }">
 						<div class="row">
 					</c:if>

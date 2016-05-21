@@ -1,6 +1,6 @@
 package org.epsi.java.ee.football.model;
 
-public class Blogg {
+public class Blog {
 	
 	private int id;
 	private String titre;

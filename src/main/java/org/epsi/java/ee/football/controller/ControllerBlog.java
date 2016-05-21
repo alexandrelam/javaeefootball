@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.epsi.java.ee.football.model.Blogg;
+import org.epsi.java.ee.football.model.Blog;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,7 +18,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Blog extends HttpServlet {
+public class ControllerBlog extends HttpServlet {
 
 	private static final String MYSQL_HOST = "localhost";
 	private static final String MYSQL_PORT = "3306";
@@ -42,7 +42,7 @@ public class Blog extends HttpServlet {
 		try {
 			conn = getConnection();
 
-			List<Blogg> EquipeArray = new ArrayList<Blogg>();
+			List<Blog> EquipeArray = new ArrayList<Blog>();
 
 			if (request.getParameter("id") != null) {
 
@@ -60,7 +60,7 @@ public class Blog extends HttpServlet {
 					String image = rs.getString("image");
 					String date = rs.getString("date");
 					
-					Blogg blog = new Blogg();
+					Blog blog = new Blog();
 					blog.setTitre(titre);
 					blog.setContenu(contenu);
 					blog.setImage(image);
@@ -93,7 +93,7 @@ public class Blog extends HttpServlet {
 					String image = rs.getString("image");
 					String date = rs.getString("date");
 					
-					Blogg blog = new Blogg();
+					Blog blog = new Blog();
 					blog.setTitre(titre);
 					blog.setContenu(contenu);
 					blog.setImage(image);
@@ -102,7 +102,7 @@ public class Blog extends HttpServlet {
 
 					EquipeArray.add(blog);
 
-					request.setAttribute("test", EquipeArray);
+					request.setAttribute("blog", EquipeArray);
 				}
 
 				request.getRequestDispatcher("/blog.jsp").forward(request, response);

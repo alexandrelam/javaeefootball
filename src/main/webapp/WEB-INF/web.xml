@@ -55,12 +55,22 @@
 
   <servlet>
     <servlet-name>Blog</servlet-name>
-    <servlet-class>org.epsi.java.ee.football.controller.Blog</servlet-class>
+    <servlet-class>org.epsi.java.ee.football.controller.ControllerBlog</servlet-class>
     <load-on-startup>1</load-on-startup>
   </servlet>
   <servlet-mapping>
     <servlet-name>Blog</servlet-name>
     <url-pattern>/blog</url-pattern>
+  </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>Resultat</servlet-name>
+    <servlet-class>org.epsi.java.ee.football.controller.ControllerResultat</servlet-class>
+    <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>Resultat</servlet-name>
+    <url-pattern>/resultat</url-pattern>
   </servlet-mapping>
   
 </web-app>
