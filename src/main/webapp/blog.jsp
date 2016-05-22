@@ -25,7 +25,7 @@
 						<p class="text-center">
 							<strong>${item.titre}</strong>
 						</p>
-						<p>${item.image}</p>
+						<img src="<c:out value="images/blog/${item.image}" />" width="100%" class="img-responsive"/>
 					</div>
 
 					<c:if test="${(status.index % 3) == 2 || status.last}">
